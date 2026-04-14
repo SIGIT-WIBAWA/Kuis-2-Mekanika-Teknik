@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Kuis Mekanika Teknik - Skalar & Vektor</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: auto; padding: 20px; background-color: #f4f4f4; }
+        .header-box { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .question-card { background: #fff; padding: 20px; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; text-align: center; }
+        .input-group { margin-bottom: 10px; }
+        label { display: block; font-weight: bold; }
+        input[type="text"], input[type="date"] { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; }
+        .options { margin-top: 10px; }
+        .option { display: block; margin-bottom: 5px; }
+        button { background: #3498db; color: #fff; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; display: block; margin: 20px auto; }
+        button:hover { background: #2980b9; }
+    </style>
+</head>
+<body>
+
+    <div class="header-box">
+        <h1>Kuis Mekanika Teknik: Pertemuan ke-2</h1>
+        <div class="input-group">
+            <label>Nama:</label>
+            <input type="text" placeholder="Masukkan nama lengkap">
+        </div>
+        <div class="input-group">
+            <label>NIM:</label>
+            <input type="text" placeholder="Masukkan NIM">
+        </div>
+        <div class="input-group">
+            <label>Kelas:</label>
+            <input type="text" placeholder="Masukkan kelas">
+        </div>
+        <div class="input-group">
+            <label>Tanggal:</label>
+            <input type="date">
+        </div>
+    </div>
+
+    <form id="quizForm">
+        <div class="question-card">
+            <p>1. Apa perbedaan mendasar antara besaran Skalar dan Vektor? [cite: 13, 21]</p>
+            <div class="options">
+                <label class="option"><input type="radio" name="q1"> Skalar punya arah, Vektor tidak.</label>
+                <label class="option"><input type="radio" name="q1"> Skalar hanya memiliki nilai, Vektor memiliki nilai dan arah.</label>
+                <label class="option"><input type="radio" name="q1"> Keduanya tidak memiliki nilai.</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <p>2. Manakah yang termasuk besaran skalar? [cite: 17, 18]</p>
+            <div class="options">
+                <label class="option"><input type="radio" name="q2"> Gaya</label>
+                <label class="option"><input type="radio" name="q2"> Kecepatan</label>
+                <label class="option"><input type="radio" name="q2"> Temperatur dan Massa</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <p>3. Simbol vektor satuan untuk arah sumbu Y positif adalah... [cite: 93]</p>
+            <div class="options">
+                <label class="option"><input type="radio" name="q3"> i</label>
+                <label class="option"><input type="radio" name="q3"> j</label>
+                <label class="option"><input type="radio" name="q3"> k</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <p>4. Berapakah besar (magnitudo) dari vektor A = 3i + 4j? [cite: 128]</p>
+            <div class="options">
+                <label class="option"><input type="radio" name="q4"> 5</label>
+                <label class="option"><input type="radio" name="q4"> 7</label>
+                <label class="option"><input type="radio" name="q4"> 25</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <p>5. Jika A = 2i + 3j dan B = -1i + 4j, berapakah resultan R = A + B? [cite: 142]</p>
+            <div class="options">
+                <label class="option"><input type="radio" name="q5"> 3i + 7j</label>
+                <label class="option"><input type="radio" name="q5"> 1i + 7j</label>
+                <label class="option"><input type="radio" name="q5"> 1i - 1j</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <p>6. Konsep utama dari Dot Product adalah mengukur... [cite: 196]</p>
+            <div class="options">
+                <label class="option"><input type="radio" name="q6"> Seberapa searah</label>
+                <label class="option"><input type="radio" name="q6"> Hasil rotasi</label>
+                <label class="option"><input type="radio" name="q6"> Luas bidang</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <p>7. Hasil dari perkalian titik (Dot Product) adalah besaran... [cite: 216]</p>
+            <div class="options">
+                <label class="option"><input type="radio" name="q7"> Vektor</label>
+                <label class="option"><input type="radio" name="q7"> Skalar</label>
+                <label class="option"><input type="radio" name="q7"> Matriks</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <p>8. Rumus besar resultan dua vektor dengan sudut θ adalah... [cite: 77]</p>
+            <div class="options">
+                <label class="option"><input type="radio" name="q8"> T = R + S</label>
+                <label class="option"><input type="radio" name="q8"> T = √(R² + S² + 2RS cos θ)</label>
+                <label class="option"><input type="radio" name="q8"> T = R × S sin θ</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <p>9. Perkalian silang (Cross Product) menghasilkan besaran... [cite: 227]</p>
+            <div class="options">
+                <label class="option"><input type="radio" name="q9"> Skalar baru</label>
+                <label class="option"><input type="radio" name="q9"> Vektor baru</label>
+                <label class="option"><input type="radio" name="q9"> Nilai nol</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <p>10. Contoh aplikasi Cross Product dalam fisika adalah... [cite: 204]</p>
+            <div class="options">
+                <label class="option"><input type="radio" name="q10"> Usaha (Work)</label>
+                <label class="option"><input type="radio" name="q10"> Torsi</label>
+                <label class="option"><input type="radio" name="q10"> Massa jenis</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <p>11. Berapakah hasil i ⋅ j dalam dot product? [cite: 220]</p>
+            <div class="options">
+                <label class="option"><input type="radio" name="q11"> 1</label>
+                <label class="option"><input type="radio" name="q11"> 0</label>
+                <label class="option"><input type="radio" name="q11"> k</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <p>12. Sifat anti-komutatif (A × B = -B × A) berlaku pada... [cite: 233]</p>
+            <div class="options">
+                <label class="option"><input type="radio" name="q12"> Penjumlahan</label>
+                <label class="option"><input type="radio" name="q12"> Dot Product</label>
+                <label class="option"><input type="radio" name="q12"> Cross Product</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <p>13. Jika sudut antara dua vektor adalah 90°, maka nilai cos θ adalah... [cite: 201]</p>
+            <div class="options">
+                <label class="option"><input type="radio" name="q13"> 1</label>
+                <label class="option"><input type="radio" name="q13"> 0</label>
+                <label class="option"><input type="radio" name="q13"> 0.5</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <p>14. Satuan dari Torsi berdasarkan contoh soal adalah... [cite: 271]</p>
+            <div class="options">
+                <label class="option"><input type="radio" name="q14"> Joule</label>
+                <label class="option"><input type="radio" name="q14"> Newton-meter (Nm)</label>
+                <label class="option"><input type="radio" name="q14"> Watt</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <p>15. Formulasi vektor 3D yang benar adalah... [cite: 95]</p>
+            <div class="options">
+                <label class="option"><input type="radio" name="q15"> R = Rx + Ry + Rz</label>
+                <label class="option"><input type="radio" name="q15"> R = Rxi + Ryj + Rzk</label>
+                <label class="option"><input type="radio" name="q15"> R = (Rx, Ry)</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <p>16. Usaha (W) dihitung dengan rumus... [cite: 200]</p>
+            <div class="options">
+                <label class="option"><input type="radio" name="q16"> F ⋅ s cos θ</label>
+                <label class="option"><input type="radio" name="q16"> F × s sin θ</label>
+                <label class="option"><input type="radio" name="q16"> m ⋅ a</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <p>17. Hasil dari i × j dalam cross product adalah... [cite: 231]</p>
+            <div class="options">
+                <label class="option"><input type="radio" name="q17"> 1</label>
+                <label class="option"><input type="radio" name="q17"> 0</label>
+                <label class="option"><input type="radio" name="q17"> k</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <p>18. Jika dua vektor R=10 dan S=10 membentuk sudut 60°, berapakah besar resultannya? [cite: 169]</p>
+            <div class="options">
+                <label class="option"><input type="radio" name="q18"> 20</label>
+                <label class="option"><input type="radio" name="q18"> 17.32</label>
+                <label class="option"><input type="radio" name="q18"> 10</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <p>19. Metode penjumlahan vektor "Ujung ke pangkal" disebut juga... [cite: 73]</p>
+            <div class="options">
+                <label class="option"><input type="radio" name="q19"> Analitis</label>
+                <label class="option"><input type="radio" name="q19"> Head-to-tail</label>
+                <label class="option"><input type="radio" name="q19"> Cross product</label>
+            </div>
+        </div>
+
+        <div class="question-card">
+            <p>20. Dalam dot product, jika gaya tegak lurus perpindahan, maka usaha adalah... [cite: 201]</p>
+            <div class="options">
+                <label class="option"><input type="radio" name="q20"> Maksimal</label>
+                <label class="option"><input type="radio" name="q20"> Nol</label>
+                <label class="option"><input type="radio" name="q20"> Negatif</label>
+            </div>
+        </div>
+
+        <button type="button" onclick="alert('Jawaban Anda telah disimpan!')">Kirim Jawaban</button>
+    </form>
+
+</body>
+</html>
