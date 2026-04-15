@@ -3,264 +3,259 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kuis Mekanika Teknik - Skalar & Vektor</title>
+    <title>Kuis Mekanika Teknik - Pertemuan 2</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; max-width: 850px; margin: auto; padding: 20px; background-color: #f4f4f4; color: #333; }
-        .card-container { background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 20px; }
-        .question-card { background: #fff; padding: 20px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #e1e1e1; page-break-inside: avoid; }
-        h1 { color: #2c3e50; text-align: center; margin-bottom: 5px; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; max-width: 850px; margin: auto; padding: 20px; background-color: #f0f2f5; color: #333; }
+        .main-container { background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        h1 { color: #2c3e50; text-align: center; margin-bottom: 5px; border-bottom: 3px solid #3498db; padding-bottom: 10px; }
         h3 { text-align: center; color: #7f8c8d; margin-bottom: 30px; font-weight: normal; }
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
-        .input-group { margin-bottom: 15px; }
-        label { display: block; font-weight: bold; margin-bottom: 5px; }
-        input[type="text"], input[type="date"] { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; }
-        .options { margin-top: 10px; }
-        .option { display: block; margin-bottom: 8px; padding: 8px; border-radius: 4px; transition: 0.2s; cursor: pointer; }
-        .option:hover { background-color: #f8f9fa; }
-        .btn-container { display: flex; gap: 10px; justify-content: center; margin: 30px 0; }
-        button { padding: 12px 25px; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; font-weight: bold; transition: 0.3s; }
-        #btn-pdf { background: #27ae60; color: white; }
-        #btn-pdf:hover { background: #219150; }
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px; background: #f8f9fa; padding: 20px; border-radius: 8px; border: 1px solid #e1e4e8; }
+        .input-group { margin-bottom: 10px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 0.9em; color: #34495e; }
+        input { width: 100%; padding: 10px; border: 1px solid #dcdfe6; border-radius: 6px; box-sizing: border-box; font-size: 14px; }
+        .question-card { background: #fff; padding: 20px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #e1e4e8; page-break-inside: avoid; }
+        .question-text { font-weight: bold; margin-bottom: 15px; color: #2c3e50; }
+        .options-list { list-style: none; padding: 0; }
+        .option-item { display: block; margin-bottom: 10px; padding: 10px; border-radius: 6px; border: 1px solid #f0f0f0; transition: background 0.2s; cursor: pointer; }
+        .option-item:hover { background-color: #f0f7ff; }
+        .btn-box { text-align: center; margin-top: 30px; padding-bottom: 50px; }
+        #btn-save-pdf { background: #27ae60; color: white; padding: 15px 40px; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; transition: 0.3s; box-shadow: 0 4px 6px rgba(39, 174, 96, 0.2); }
+        #btn-save-pdf:hover { background: #219150; transform: translateY(-2px); }
         
-        /* Pengaturan saat dicetak ke PDF */
         @media print {
-            .btn-container { display: none; }
+            #btn-save-pdf { display: none; }
             body { background: white; padding: 0; }
-            .card-container { box-shadow: none; border: none; }
+            .main-container { box-shadow: none; border: none; }
         }
     </style>
 </head>
 <body>
 
-    <div id="quiz-content">
-        <div class="card-container">
-            <h1>Kuis Mekanika Teknik</h1>
-            <h3>Pertemuan ke-2: Skalar & Vektor</h3>
-            
-            <div class="form-grid">
-                <div class="input-group">
-                    <label>Nama Mahasiswa:</label>
-                    <input type="text" id="nama" placeholder="Nama Lengkap">
-                </div>
-                <div class="input-group">
-                    <label>NIM:</label>
-                    <input type="text" id="nim" placeholder="Nomor Induk Mahasiswa">
-                </div>
-                <div class="input-group">
-                    <label>Kelas:</label>
-                    <input type="text" id="kelas" placeholder="Contoh: 12.4A.01">
-                </div>
-                <div class="input-group">
-                    <label>Tanggal Pengerjaan:</label>
-                    <input type="date" id="tanggal">
-                </div>
+    <div id="quiz-area" class="main-container">
+        <h1>Kuis Mekanika Teknik</h1>
+        <h3>Materi: Skalar & Vektor (Pertemuan 2)</h3>
+        
+        <div class="info-grid">
+            <div class="input-group">
+                <label>Nama Mahasiswa:</label>
+                <input type="text" id="std-nama" placeholder="Ketik nama lengkap...">
+            </div>
+            <div class="input-group">
+                <label>NIM:</label>
+                <input type="text" id="std-nim" placeholder="Ketik NIM...">
+            </div>
+            <div class="input-group">
+                <label>Kelas:</label>
+                <input type="text" id="std-kelas" placeholder="Ketik kelas...">
+            </div>
+            <div class="input-group">
+                <label>Tanggal:</label>
+                <input type="date" id="std-tgl">
             </div>
         </div>
 
         <form id="quizForm">
             <div class="question-card">
-                <p><strong>1. Apa perbedaan mendasar antara besaran Skalar dan Vektor?</strong></p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="q1"> Skalar punya arah, Vektor tidak.</label>
-                    <label class="option"><input type="radio" name="q1"> Skalar hanya memiliki nilai, Vektor memiliki nilai dan arah.</label>
-                    <label class="option"><input type="radio" name="q1"> Keduanya tidak memiliki nilai.</label>
+                <div class="question-text">1. Apa perbedaan mendasar antara besaran Skalar dan Vektor?</div>
+                <div class="options-list">
+                    <label class="option-item"><input type="radio" name="q1"> Skalar punya arah, Vektor tidak.</label>
+                    <label class="option-item"><input type="radio" name="q1"> Skalar hanya memiliki nilai, Vektor memiliki nilai dan arah.</label>
+                    <label class="option-item"><input type="radio" name="q1"> Keduanya tidak memiliki nilai.</label>
                 </div>
             </div>
 
             <div class="question-card">
-                <p><strong>2. Manakah yang termasuk besaran skalar?</strong></p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="q2"> Gaya</label>
-                    <label class="option"><input type="radio" name="q2"> Kecepatan</label>
-                    <label class="option"><input type="radio" name="q2"> Temperatur dan Massa</label>
+                <div class="question-text">2. Manakah yang termasuk besaran skalar?</div>
+                <div class="options-list">
+                    <label class="option-item"><input type="radio" name="q2"> Gaya</label>
+                    <label class="option-item"><input type="radio" name="q2"> Kecepatan</label>
+                    <label class="option-item"><input type="radio" name="q2"> Temperatur dan Massa</label>
                 </div>
             </div>
 
             <div class="question-card">
-                <p><strong>3. Simbol vektor satuan untuk arah sumbu Y positif adalah...</strong></p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="q3"> i</label>
-                    <label class="option"><input type="radio" name="q3"> j</label>
-                    <label class="option"><input type="radio" name="q3"> k</label>
+                <div class="question-text">3. Simbol vektor satuan untuk arah sumbu Y positif adalah...</div>
+                <div class="options-list">
+                    <label class="option-item"><input type="radio" name="q3"> i</label>
+                    <label class="option-item"><input type="radio" name="q3"> j</label>
+                    <label class="option-item"><input type="radio" name="q3"> k</label>
                 </div>
             </div>
 
             <div class="question-card">
-                <p><strong>4. Berapakah besar (magnitudo) dari vektor A = 3i + 4j?</strong></p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="q4"> 5</label>
-                    <label class="option"><input type="radio" name="q4"> 7</label>
-                    <label class="option"><input type="radio" name="q4"> 25</label>
+                <div class="question-text">4. Berapakah besar (magnitudo) dari vektor A = 3i + 4j?</div>
+                <div class="options-list">
+                    <label class="option-item"><input type="radio" name="q4"> 5</label>
+                    <label class="option-item"><input type="radio" name="q4"> 7</label>
+                    <label class="option-item"><input type="radio" name="q4"> 25</label>
                 </div>
             </div>
 
             <div class="question-card">
-                <p><strong>5. Jika A = 2i + 3j dan B = -1i + 4j, berapakah resultan R = A + B?</strong></p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="q5"> 3i + 7j</label>
-                    <label class="option"><input type="radio" name="q5"> 1i + 7j</label>
-                    <label class="option"><input type="radio" name="q5"> 1i - 1j</label>
+                <div class="question-text">5. Jika A = 2i + 3j dan B = -1i + 4j, berapakah resultan R = A + B?</div>
+                <div class="options-list">
+                    <label class="option-item"><input type="radio" name="q5"> 3i + 7j</label>
+                    <label class="option-item"><input type="radio" name="q5"> 1i + 7j</label>
+                    <label class="option-item"><input type="radio" name="q5"> 1i - 1j</label>
                 </div>
             </div>
 
             <div class="question-card">
-                <p><strong>6. Konsep utama dari Dot Product adalah mengukur...</strong></p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="q6"> Seberapa searah</label>
-                    <label class="option"><input type="radio" name="q6"> Hasil rotasi</label>
-                    <label class="option"><input type="radio" name="q6"> Luas bidang</label>
+                <div class="question-text">6. Konsep utama dari Dot Product adalah mengukur...</div>
+                <div class="options-list">
+                    <label class="option-item"><input type="radio" name="q6"> Seberapa searah</label>
+                    <label class="option-item"><input type="radio" name="q6"> Hasil rotasi</label>
+                    <label class="option-item"><input type="radio" name="q6"> Luas bidang</label>
                 </div>
             </div>
 
             <div class="question-card">
-                <p><strong>7. Hasil dari perkalian titik (Dot Product) adalah besaran...</strong></p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="q7"> Vektor</label>
-                    <label class="option"><input type="radio" name="q7"> Skalar</label>
-                    <label class="option"><input type="radio" name="q7"> Matriks</label>
+                <div class="question-text">7. Hasil dari perkalian titik (Dot Product) adalah besaran...</div>
+                <div class="options-list">
+                    <label class="option-item"><input type="radio" name="q7"> Vektor</label>
+                    <label class="option-item"><input type="radio" name="q7"> Skalar</label>
+                    <label class="option-item"><input type="radio" name="q7"> Matriks</label>
                 </div>
             </div>
 
             <div class="question-card">
-                <p><strong>8. Rumus besar resultan dua vektor dengan sudut θ adalah...</strong></p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="q8"> T = R + S</label>
-                    <label class="option"><input type="radio" name="q8"> T = √(R² + S² + 2RS cos θ)</label>
-                    <label class="option"><input type="radio" name="q8"> T = R × S sin θ</label>
+                <div class="question-text">8. Rumus besar resultan dua vektor dengan sudut θ adalah...</div>
+                <div class="options-list">
+                    <label class="option-item"><input type="radio" name="q8"> T = R + S</label>
+                    <label class="option-item"><input type="radio" name="q8"> T = √(R² + S² + 2RS cos θ)</label>
+                    <label class="option-item"><input type="radio" name="q8"> T = R × S sin θ</label>
                 </div>
             </div>
 
             <div class="question-card">
-                <p><strong>9. Perkalian silang (Cross Product) menghasilkan besaran...</strong></p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="q9"> Skalar baru</label>
-                    <label class="option"><input type="radio" name="q9"> Vektor baru</label>
-                    <label class="option"><input type="radio" name="q9"> Nilai nol</label>
+                <div class="question-text">9. Perkalian silang (Cross Product) menghasilkan besaran...</div>
+                <div class="options-list">
+                    <label class="option-item"><input type="radio" name="q9"> Skalar baru</label>
+                    <label class="option-item"><input type="radio" name="q9"> Vektor baru</label>
+                    <label class="option-item"><input type="radio" name="q9"> Nilai nol</label>
                 </div>
             </div>
 
             <div class="question-card">
-                <p><strong>10. Contoh aplikasi Cross Product dalam fisika adalah...</strong></p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="q10"> Usaha (Work)</label>
-                    <label class="option"><input type="radio" name="q10"> Torsi</label>
-                    <label class="option"><input type="radio" name="q10"> Massa jenis</label>
+                <div class="question-text">10. Contoh aplikasi Cross Product dalam fisika adalah...</div>
+                <div class="options-list">
+                    <label class="option-item"><input type="radio" name="q10"> Usaha (Work)</label>
+                    <label class="option-item"><input type="radio" name="q10"> Torsi</label>
+                    <label class="option-item"><input type="radio" name="q10"> Massa jenis</label>
                 </div>
             </div>
 
             <div class="question-card">
-                <p><strong>11. Berapakah hasil i ⋅ j dalam dot product?</strong></p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="q11"> 1</label>
-                    <label class="option"><input type="radio" name="q11"> 0</label>
-                    <label class="option"><input type="radio" name="q11"> k</label>
+                <div class="question-text">11. Berapakah hasil i ⋅ j dalam dot product?</div>
+                <div class="options-list">
+                    <label class="option-item"><input type="radio" name="q11"> 1</label>
+                    <label class="option-item"><input type="radio" name="q11"> 0</label>
+                    <label class="option-item"><input type="radio" name="q11"> k</label>
                 </div>
             </div>
 
             <div class="question-card">
-                <p><strong>12. Sifat anti-komutatif (A × B = -B × A) berlaku pada...</strong></p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="q12"> Penjumlahan</label>
-                    <label class="option"><input type="radio" name="q12"> Dot Product</label>
-                    <label class="option"><input type="radio" name="q12"> Cross Product</label>
+                <div class="question-text">12. Sifat anti-komutatif (A × B = -B × A) berlaku pada...</div>
+                <div class="options-list">
+                    <label class="option-item"><input type="radio" name="q12"> Penjumlahan</label>
+                    <label class="option-item"><input type="radio" name="q12"> Dot Product</label>
+                    <label class="option-item"><input type="radio" name="q12"> Cross Product</label>
                 </div>
             </div>
 
             <div class="question-card">
-                <p><strong>13. Jika sudut antara dua vektor adalah 90°, maka nilai cos θ adalah...</strong></p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="q13"> 1</label>
-                    <label class="option"><input type="radio" name="q13"> 0</label>
-                    <label class="option"><input type="radio" name="q13"> 0.5</label>
+                <div class="question-text">13. Jika sudut antara dua vektor adalah 90°, maka nilai cos θ adalah...</div>
+                <div class="options-list">
+                    <label class="option-item"><input type="radio" name="q13"> 1</label>
+                    <label class="option-item"><input type="radio" name="q13"> 0</label>
+                    <label class="option-item"><input type="radio" name="q13"> 0.5</label>
                 </div>
             </div>
 
             <div class="question-card">
-                <p><strong>14. Satuan dari Torsi berdasarkan contoh soal adalah...</strong></p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="q14"> Joule</label>
-                    <label class="option"><input type="radio" name="q14"> Newton-meter (Nm)</label>
-                    <label class="option"><input type="radio" name="q14"> Watt</label>
+                <div class="question-text">14. Satuan dari Torsi berdasarkan contoh soal adalah...</div>
+                <div class="options-list">
+                    <label class="option-item"><input type="radio" name="q14"> Joule</label>
+                    <label class="option-item"><input type="radio" name="q14"> Newton-meter (Nm)</label>
+                    <label class="option-item"><input type="radio" name="q14"> Watt</label>
                 </div>
             </div>
 
             <div class="question-card">
-                <p><strong>15. Formulasi vektor 3D yang benar adalah...</strong></p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="q15"> R = Rx + Ry + Rz</label>
-                    <label class="option"><input type="radio" name="q15"> R = Rxi + Ryj + Rzk</label>
-                    <label class="option"><input type="radio" name="q15"> R = (Rx, Ry)</label>
+                <div class="question-text">15. Formulasi vektor 3D yang benar adalah...</div>
+                <div class="options-list">
+                    <label class="option-item"><input type="radio" name="q15"> R = Rx + Ry + Rz</label>
+                    <label class="option-item"><input type="radio" name="q15"> R = Rxi + Ryj + Rzk</label>
+                    <label class="option-item"><input type="radio" name="q15"> R = (Rx, Ry)</label>
                 </div>
             </div>
 
             <div class="question-card">
-                <p><strong>16. Usaha (W) dihitung dengan rumus...</strong></p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="q16"> F ⋅ s cos θ</label>
-                    <label class="option"><input type="radio" name="q16"> F × s sin θ</label>
-                    <label class="option"><input type="radio" name="q16"> m ⋅ a</label>
+                <div class="question-text">16. Usaha (W) dihitung dengan rumus...</div>
+                <div class="options-list">
+                    <label class="option-item"><input type="radio" name="q16"> F ⋅ s cos θ</label>
+                    <label class="option-item"><input type="radio" name="q16"> F × s sin θ</label>
+                    <label class="option-item"><input type="radio" name="q16"> m ⋅ a</label>
                 </div>
             </div>
 
             <div class="question-card">
-                <p><strong>17. Hasil dari i × j dalam cross product adalah...</strong></p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="q17"> 1</label>
-                    <label class="option"><input type="radio" name="q17"> 0</label>
-                    <label class="option"><input type="radio" name="q17"> k</label>
+                <div class="question-text">17. Hasil dari i × j dalam cross product adalah...</div>
+                <div class="options-list">
+                    <label class="option-item"><input type="radio" name="q17"> 1</label>
+                    <label class="option-item"><input type="radio" name="q17"> 0</label>
+                    <label class="option-item"><input type="radio" name="q17"> k</label>
                 </div>
             </div>
 
             <div class="question-card">
-                <p><strong>18. Jika dua vektor R=10 dan S=10 membentuk sudut 60°, berapakah besar resultannya?</strong></p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="q18"> 20</label>
-                    <label class="option"><input type="radio" name="q18"> 17.32</label>
-                    <label class="option"><input type="radio" name="q18"> 10</label>
+                <div class="question-text">18. Jika dua vektor R=10 dan S=10 membentuk sudut 60°, berapakah besar resultannya?</div>
+                <div class="options-list">
+                    <label class="option-item"><input type="radio" name="q18"> 20</label>
+                    <label class="option-item"><input type="radio" name="q18"> 17.32</label>
+                    <label class="option-item"><input type="radio" name="q18"> 10</label>
                 </div>
             </div>
 
             <div class="question-card">
-                <p><strong>19. Metode penjumlahan vektor "Ujung ke pangkal" disebut juga...</strong></p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="q19"> Analitis</label>
-                    <label class="option"><input type="radio" name="q19"> Head-to-tail</label>
-                    <label class="option"><input type="radio" name="q19"> Cross product</label>
+                <div class="question-text">19. Metode penjumlahan vektor "Ujung ke pangkal" disebut juga...</div>
+                <div class="options-list">
+                    <label class="option-item"><input type="radio" name="q19"> Analitis</label>
+                    <label class="option-item"><input type="radio" name="q19"> Head-to-tail</label>
+                    <label class="option-item"><input type="radio" name="q19"> Cross product</label>
                 </div>
             </div>
 
             <div class="question-card">
-                <p><strong>20. Dalam dot product, jika gaya tegak lurus perpindahan, maka usaha adalah...</strong></p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="q20"> Maksimal</label>
-                    <label class="option"><input type="radio" name="q20"> Nol</label>
-                    <label class="option"><input type="radio" name="q20"> Negatif</label>
+                <div class="question-text">20. Dalam dot product, jika gaya tegak lurus perpindahan, maka usaha adalah...</div>
+                <div class="options-list">
+                    <label class="option-item"><input type="radio" name="q20"> Maksimal</label>
+                    <label class="option-item"><input type="radio" name="q20"> Nol</label>
+                    <label class="option-item"><input type="radio" name="q20"> Negatif</label>
                 </div>
             </div>
         </form>
     </div>
 
-    <div class="btn-container">
-        <button type="button" id="btn-pdf" onclick="saveToPDF()">Save to PDF</button>
+    <div class="btn-box">
+        <button type="button" id="btn-save-pdf" onclick="exportToPDF()">Save to PDF</button>
     </div>
 
     <script>
-        function saveToPDF() {
-            const element = document.getElementById('quiz-content');
-            const nim = document.getElementById('nim').value || 'Mahasiswa';
+        function exportToPDF() {
+            const element = document.getElementById('quiz-area');
+            const nim = document.getElementById('std-nim').value || 'Mahasiswa';
             
-            // Konfigurasi export PDF
-            const opt = {
-                margin:       0.5,
+            const options = {
+                margin:       [0.5, 0.5],
                 filename:     'Kuis_Mekanika_' + nim + '.pdf',
                 image:        { type: 'jpeg', quality: 0.98 },
                 html2canvas:  { scale: 2, useCORS: true },
-                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+                jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
             };
 
-            // Menjalankan library html2pdf
-            html2pdf().set(opt).from(element).save();
+            html2pdf().set(options).from(element).save();
         }
     </script>
 
