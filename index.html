@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kuis Mekanika Teknik - Save to PDF</title>
+    <title>Kuis Mekanika Teknik - Pertemuan 2</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; max-width: 850px; margin: auto; padding: 20px; background-color: #f0f2f5; color: #333; }
@@ -22,9 +22,11 @@
         .option-item input[type="radio"] { margin: 0 15px 0 0; cursor: pointer; width: 18px; height: 18px; flex-shrink: 0; }
         .option-label { cursor: pointer; font-size: 15px; color: #444; }
         .btn-box { text-align: center; margin-top: 30px; padding-bottom: 50px; }
-        #btn-save-pdf { background: #27ae60; color: white; padding: 15px 40px; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; transition: 0.3s; box-shadow: 0 4px 6px rgba(39, 174, 96, 0.2); }
-        #btn-save-pdf:hover { background: #219150; transform: translateY(-2px); }
-        @media print { #btn-save-pdf { display: none; } body { background: white; padding: 0; } .main-container { box-shadow: none; border: none; } }
+        button { padding: 15px 40px; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; transition: 0.3s; }
+        #btn-finish { background: #3498db; color: white; }
+        #btn-save-pdf { background: #27ae60; color: white; display: none; box-shadow: 0 4px 6px rgba(39, 174, 96, 0.2); }
+        #result-display { display: none; text-align: center; font-size: 1.5em; font-weight: bold; color: #2c3e50; margin: 20px 0; padding: 20px; border-top: 2px dashed #3498db; }
+        @media print { #btn-save-pdf, #btn-finish { display: none; } body { background: white; padding: 0; } .main-container { box-shadow: none; border: none; } }
     </style>
 </head>
 <body>
@@ -41,64 +43,81 @@
         </div>
 
         <form id="quizForm">
-            <script>
-                const questions = [
-                    ["Apa perbedaan mendasar antara besaran Skalar dan Vektor?", ["Skalar punya arah, Vektor tidak.", "Skalar hanya memiliki nilai, Vektor memiliki nilai dan arah.", "Keduanya tidak memiliki nilai."]],
-                    ["Manakah yang termasuk besaran skalar?", ["Gaya", "Kecepatan", "Temperatur dan Massa"]],
-                    ["Simbol vektor satuan untuk arah sumbu Y positif adalah...", ["i", "j", "k"]],
-                    ["Berapakah besar (magnitudo) dari vektor A = 3i + 4j?", ["5", "7", "25"]],
-                    ["Jika A = 2i + 3j dan B = -1i + 4j, berapakah resultan R = A + B?", ["3i + 7j", "1i + 7j", "1i - 1j"]],
-                    ["Konsep utama dari Dot Product adalah mengukur...", ["Seberapa searah", "Hasil rotasi", "Luas bidang"]],
-                    ["Hasil dari perkalian titik (Dot Product) adalah besaran...", ["Vektor", "Skalar", "Matriks"]],
-                    ["Rumus besar resultan dua vektor dengan sudut θ adalah...", ["T = R + S", "T = √(R² + S² + 2RS cos θ)", "T = R × S sin θ"]],
-                    ["Perkalian silang (Cross Product) menghasilkan besaran...", ["Skalar baru", "Vektor baru", "Nilai nol"]],
-                    ["Contoh aplikasi Cross Product dalam fisika adalah...", ["Usaha (Work)", "Torsi", "Massa jenis"]],
-                    ["Berapakah hasil i ⋅ j dalam dot product?", ["1", "0", "k"]],
-                    ["Sifat anti-komutatif (A × B = -B × A) berlaku pada...", ["Penjumlahan", "Dot Product", "Cross Product"]],
-                    ["Jika sudut antara dua vektor adalah 90°, maka nilai cos θ adalah...", ["1", "0", "0.5"]],
-                    ["Satuan dari Torsi berdasarkan contoh soal adalah...", ["Joule", "Newton-meter (Nm)", "Watt"]],
-                    ["Formulasi vektor 3D yang benar adalah...", ["R = Rx + Ry + Rz", "R = Rxi + Ryj + Rzk", "R = (Rx, Ry)"]],
-                    ["Usaha (W) dihitung dengan rumus...", ["F ⋅ s cos θ", "F × s sin θ", "m ⋅ a"]],
-                    ["Hasil dari i × j dalam cross product adalah...", ["1", "0", "k"]],
-                    ["Jika dua vektor R=10 dan S=10 membentuk sudut 60°, berapakah besar resultannya?", ["20", "17.32", "10"]],
-                    ["Metode penjumlahan vektor \"Ujung ke pangkal\" disebut juga...", ["Analitis", "Head-to-tail", "Cross product"]],
-                    ["Dalam dot product, jika gaya tegak lurus perpindahan, maka usaha adalah...", ["Maksimal", "Nol", "Negatif"]]
-                ];
-
-                const form = document.getElementById('quizForm');
-                questions.forEach((q, i) => {
-                    let optionsHtml = q[1].map(opt => `
-                        <label class="option-item">
-                            <input type="radio" name="q${i+1}">
-                            <span class="option-label">${opt}</span>
-                        </label>`).join('');
-                    
-                    form.innerHTML += `
-                        <div class="question-card">
-                            <div class="question-text">${i+1}. ${q[0]}</div>
-                            <div class="options-list">${optionsHtml}</div>
-                        </div>`;
-                });
-            </script>
+            <div id="dynamic-questions"></div>
         </form>
+
+        <div id="result-display"></div>
     </div>
 
     <div class="btn-box">
+        <button type="button" id="btn-finish" onclick="finishQuiz()">Selesai & Lihat Skor</button>
         <button type="button" id="btn-save-pdf" onclick="exportToPDF()">Save to PDF</button>
     </div>
 
     <script>
+        const questions = [
+            ["Apa perbedaan mendasar antara besaran Skalar dan Vektor?", ["Skalar punya arah, Vektor tidak.", "Skalar hanya memiliki nilai, Vektor memiliki nilai dan arah.", "Keduanya tidak memiliki nilai."], 1],
+            ["Manakah yang termasuk besaran skalar?", ["Gaya", "Kecepatan", "Temperatur dan Massa"], 2],
+            ["Simbol vektor satuan untuk arah sumbu Y positif adalah...", ["i", "j", "k"], 1],
+            ["Berapakah besar (magnitudo) dari vektor A = 3i + 4j?", ["5", "7", "25"], 0],
+            ["Jika A = 2i + 3j dan B = -1i + 4j, berapakah resultan R = A + B?", ["3i + 7j", "1i + 7j", "1i - 1j"], 1],
+            ["Konsep utama dari Dot Product adalah mengukur...", ["Seberapa searah", "Hasil rotasi", "Luas bidang"], 0],
+            ["Hasil dari perkalian titik (Dot Product) adalah besaran...", ["Vektor", "Skalar", "Matriks"], 1],
+            ["Rumus besar resultan dua vektor dengan sudut θ adalah...", ["T = R + S", "T = √(R² + S² + 2RS cos θ)", "T = R × S sin θ"], 1],
+            ["Perkalian silang (Cross Product) menghasilkan besaran...", ["Skalar baru", "Vektor baru", "Nilai nol"], 1],
+            ["Contoh aplikasi Cross Product dalam fisika adalah...", ["Usaha (Work)", "Torsi", "Massa jenis"], 1],
+            ["Berapakah hasil i ⋅ j dalam dot product?", ["1", "0", "k"], 1],
+            ["Sifat anti-komutatif (A × B = -B × A) berlaku pada...", ["Penjumlahan", "Dot Product", "Cross Product"], 2],
+            ["Jika sudut antara dua vektor adalah 90°, maka nilai cos θ adalah...", ["1", "0", "0.5"], 1],
+            ["Satuan dari Torsi berdasarkan contoh soal adalah...", ["Joule", "Newton-meter (Nm)", "Watt"], 1],
+            ["Formulasi vektor 3D yang benar adalah...", ["R = Rx + Ry + Rz", "R = Rxi + Ryj + Rzk", "R = (Rx, Ry)"], 1],
+            ["Usaha (W) dihitung dengan rumus...", ["F ⋅ s cos θ", "F × s sin θ", "m ⋅ a"], 0],
+            ["Hasil dari i × j dalam cross product adalah...", ["1", "0", "k"], 2],
+            ["Jika dua vektor R=10 dan S=10 membentuk sudut 60°, berapakah besar resultannya?", ["20", "17.32", "10"], 1],
+            ["Metode penjumlahan vektor \"Ujung ke pangkal\" disebut juga...", ["Analitis", "Head-to-tail", "Cross product"], 1],
+            ["Dalam dot product, jika gaya tegak lurus perpindahan, maka usaha adalah...", ["Maksimal", "Nol", "Negatif"], 1]
+        ];
+
+        const container = document.getElementById('dynamic-questions');
+        questions.forEach((q, i) => {
+            let options = q[1].map((opt, idx) => `
+                <label class="option-item">
+                    <input type="radio" name="q${i}" value="${idx}">
+                    <span class="option-label">${opt}</span>
+                </label>`).join('');
+            container.innerHTML += `
+                <div class="question-card">
+                    <div class="question-text">${i+1}. ${q[0]}</div>
+                    <div class="options-list">${options}</div>
+                </div>`;
+        });
+
+        function finishQuiz() {
+            let score = 0;
+            questions.forEach((q, i) => {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                if (selected && parseInt(selected.value) === q[2]) score++;
+            });
+
+            const display = document.getElementById('result-display');
+            display.style.display = 'block';
+            display.innerHTML = `SKOR ANDA: ${score} / ${questions.length} (${(score/questions.length*100).toFixed(0)}%)`;
+            
+            document.getElementById('btn-finish').style.display = 'none';
+            document.getElementById('btn-save-pdf').style.display = 'inline-block';
+            window.scrollTo(0, document.body.scrollHeight);
+        }
+
         function exportToPDF() {
             const element = document.getElementById('quiz-area');
             const nim = document.getElementById('std-nim').value || 'MHS';
-            const options = {
+            html2pdf().set({
                 margin: 0.5,
                 filename: 'Hasil_Kuis_Mekanika_' + nim + '.pdf',
                 image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true },
+                html2canvas: { scale: 2 },
                 jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
-            };
-            html2pdf().set(options).from(element).save();
+            }).from(element).save();
         }
     </script>
 </body>
