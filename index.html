@@ -17,20 +17,14 @@
         .question-card { background: #fff; padding: 20px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #e1e4e8; page-break-inside: avoid; }
         .question-text { font-weight: bold; margin-bottom: 15px; color: #2c3e50; }
         .options-list { list-style: none; padding: 0; }
-        /* Menggeser radio button ke kiri rata dengan teks */
-        .option-item { display: flex; align-items: center; margin-bottom: 12px; padding: 12px; border-radius: 6px; border: 1px solid #f0f0f0; transition: background 0.2s; cursor: pointer; }
+        .option-item { display: flex; align-items: center; margin-bottom: 12px; padding: 10px; border-radius: 6px; border: 1px solid #f0f0f0; cursor: pointer; transition: background 0.2s; }
         .option-item:hover { background-color: #f0f7ff; }
-        .option-item input[type="radio"] { margin-right: 15px; cursor: pointer; width: 18px; height: 18px; flex-shrink: 0; }
+        .option-item input[type="radio"] { margin: 0 15px 0 0; cursor: pointer; width: 18px; height: 18px; flex-shrink: 0; }
         .option-label { cursor: pointer; font-size: 15px; color: #444; }
         .btn-box { text-align: center; margin-top: 30px; padding-bottom: 50px; }
         #btn-save-pdf { background: #27ae60; color: white; padding: 15px 40px; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; transition: 0.3s; box-shadow: 0 4px 6px rgba(39, 174, 96, 0.2); }
         #btn-save-pdf:hover { background: #219150; transform: translateY(-2px); }
-        
-        @media print {
-            #btn-save-pdf { display: none; }
-            body { background: white; padding: 0; }
-            .main-container { box-shadow: none; border: none; }
-        }
+        @media print { #btn-save-pdf { display: none; } body { background: white; padding: 0; } .main-container { box-shadow: none; border: none; } }
     </style>
 </head>
 <body>
@@ -40,62 +34,53 @@
         <h3>Materi: Skalar & Vektor (Pertemuan 2)</h3>
         
         <div class="info-grid">
-            <div class="input-group">
-                <label>Nama Mahasiswa:</label>
-                <input type="text" id="std-nama" placeholder="Ketik nama lengkap...">
-            </div>
-            <div class="input-group">
-                <label>NIM:</label>
-                <input type="text" id="std-nim" placeholder="Ketik NIM...">
-            </div>
-            <div class="input-group">
-                <label>Kelas:</label>
-                <input type="text" id="std-kelas" placeholder="Ketik kelas...">
-            </div>
-            <div class="input-group">
-                <label>Tanggal:</label>
-                <input type="date" id="std-tgl">
-            </div>
+            <div class="input-group"><label>Nama Mahasiswa:</label><input type="text" id="std-nama" placeholder="Nama lengkap..."></div>
+            <div class="input-group"><label>NIM:</label><input type="text" id="std-nim" placeholder="NIM..."></div>
+            <div class="input-group"><label>Kelas:</label><input type="text" id="std-kelas" placeholder="Kelas..."></div>
+            <div class="input-group"><label>Tanggal:</label><input type="date" id="std-tgl"></div>
         </div>
 
         <form id="quizForm">
-            <div class="question-card">
-                <div class="question-text">19. Metode penjumlahan vektor "Ujung ke pangkal" disebut juga...</div>
-                <div class="options-list">
-                    <label class="option-item">
-                        <input type="radio" name="q19">
-                        <span class="option-label">Analitis</span>
-                    </label>
-                    <label class="option-item">
-                        <input type="radio" name="q19">
-                        <span class="option-label">Head-to-tail</span>
-                    </label>
-                    <label class="option-item">
-                        <input type="radio" name="q19">
-                        <span class="option-label">Cross product</span>
-                    </label>
-                </div>
-            </div>
+            <script>
+                const questions = [
+                    ["Apa perbedaan mendasar antara besaran Skalar dan Vektor?", ["Skalar punya arah, Vektor tidak.", "Skalar hanya memiliki nilai, Vektor memiliki nilai dan arah.", "Keduanya tidak memiliki nilai."]],
+                    ["Manakah yang termasuk besaran skalar?", ["Gaya", "Kecepatan", "Temperatur dan Massa"]],
+                    ["Simbol vektor satuan untuk arah sumbu Y positif adalah...", ["i", "j", "k"]],
+                    ["Berapakah besar (magnitudo) dari vektor A = 3i + 4j?", ["5", "7", "25"]],
+                    ["Jika A = 2i + 3j dan B = -1i + 4j, berapakah resultan R = A + B?", ["3i + 7j", "1i + 7j", "1i - 1j"]],
+                    ["Konsep utama dari Dot Product adalah mengukur...", ["Seberapa searah", "Hasil rotasi", "Luas bidang"]],
+                    ["Hasil dari perkalian titik (Dot Product) adalah besaran...", ["Vektor", "Skalar", "Matriks"]],
+                    ["Rumus besar resultan dua vektor dengan sudut θ adalah...", ["T = R + S", "T = √(R² + S² + 2RS cos θ)", "T = R × S sin θ"]],
+                    ["Perkalian silang (Cross Product) menghasilkan besaran...", ["Skalar baru", "Vektor baru", "Nilai nol"]],
+                    ["Contoh aplikasi Cross Product dalam fisika adalah...", ["Usaha (Work)", "Torsi", "Massa jenis"]],
+                    ["Berapakah hasil i ⋅ j dalam dot product?", ["1", "0", "k"]],
+                    ["Sifat anti-komutatif (A × B = -B × A) berlaku pada...", ["Penjumlahan", "Dot Product", "Cross Product"]],
+                    ["Jika sudut antara dua vektor adalah 90°, maka nilai cos θ adalah...", ["1", "0", "0.5"]],
+                    ["Satuan dari Torsi berdasarkan contoh soal adalah...", ["Joule", "Newton-meter (Nm)", "Watt"]],
+                    ["Formulasi vektor 3D yang benar adalah...", ["R = Rx + Ry + Rz", "R = Rxi + Ryj + Rzk", "R = (Rx, Ry)"]],
+                    ["Usaha (W) dihitung dengan rumus...", ["F ⋅ s cos θ", "F × s sin θ", "m ⋅ a"]],
+                    ["Hasil dari i × j dalam cross product adalah...", ["1", "0", "k"]],
+                    ["Jika dua vektor R=10 dan S=10 membentuk sudut 60°, berapakah besar resultannya?", ["20", "17.32", "10"]],
+                    ["Metode penjumlahan vektor \"Ujung ke pangkal\" disebut juga...", ["Analitis", "Head-to-tail", "Cross product"]],
+                    ["Dalam dot product, jika gaya tegak lurus perpindahan, maka usaha adalah...", ["Maksimal", "Nol", "Negatif"]]
+                ];
 
-            <div class="question-card">
-                <div class="question-text">20. Dalam dot product, jika gaya tegak lurus perpindahan, maka usaha adalah...</div>
-                <div class="options-list">
-                    <label class="option-item">
-                        <input type="radio" name="q20">
-                        <span class="option-label">Maksimal</span>
-                    </label>
-                    <label class="option-item">
-                        <input type="radio" name="q20">
-                        <span class="option-label">Nol</span>
-                    </label>
-                    <label class="option-item">
-                        <input type="radio" name="q20">
-                        <span class="option-label">Negatif</span>
-                    </label>
-                </div>
-            </div>
-            
-            </form>
+                const form = document.getElementById('quizForm');
+                questions.forEach((q, i) => {
+                    let optionsHtml = q[1].map(opt => `
+                        <label class="option-item">
+                            <input type="radio" name="q${i+1}">
+                            <span class="option-label">${opt}</span>
+                        </label>`).join('');
+                    
+                    form.innerHTML += `
+                        <div class="question-card">
+                            <div class="question-text">${i+1}. ${q[0]}</div>
+                            <div class="options-list">${optionsHtml}</div>
+                        </div>`;
+                });
+            </script>
+        </form>
     </div>
 
     <div class="btn-box">
@@ -106,18 +91,15 @@
         function exportToPDF() {
             const element = document.getElementById('quiz-area');
             const nim = document.getElementById('std-nim').value || 'MHS';
-            
             const options = {
-                margin:       [0.5, 0.5],
-                filename:     'Hasil_Kuis_Mekanika_' + nim + '.pdf',
-                image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true },
-                jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+                margin: 0.5,
+                filename: 'Hasil_Kuis_Mekanika_' + nim + '.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
             };
-
             html2pdf().set(options).from(element).save();
         }
     </script>
-
 </body>
 </html>
